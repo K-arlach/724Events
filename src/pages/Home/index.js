@@ -15,20 +15,15 @@ import { useData } from "../../contexts/DataContext";
 const Page = () => {
   
    const { data } = useData();
-   // const qui vient chercher la dernière prestation
-
-   const last =
-     data && data.events && data.events.length > 0
-       ? data.events.reduce((latest, current) => {
-           // Utiliser la date pour comparer et trouver la prestation la plus récente
-           const latestDate = new Date(latest.date);
-           const currentDate = new Date(current.date);
- 
-           return currentDate > latestDate ? current : latest;
-         })
-       : null;
-      
-
+   
+       const bestDate = new Date(0);
+       let best = {};
+       for (let ii= 0; ii < data?.events.length; ii+=1) {
+          if (new Date(data?.events[ii].date) > bestDate) {
+              best = data?.events[ii];
+          }
+       }
+       const last = best;
 
 
   return <>
@@ -133,7 +128,7 @@ const Page = () => {
     <footer className="row">
       <div className="col presta">
         <h3>Notre derniére prestation</h3>
-        {last && (
+         
             <EventCard
               data-testid="last-event-card"
               imageSrc={last?.cover}
@@ -143,7 +138,7 @@ const Page = () => {
               small
               label={last?.type}
             />
-          )}
+      
         
       </div>
       <div className="col contact">

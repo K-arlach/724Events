@@ -128,8 +128,8 @@ const Page = () => {
     <footer className="row">
       <div className="col presta">
         <h3>Notre derniére prestation</h3>
-         {last && last.title && //Ajoute une verification sur la condition last et vérifie que last contient bien un title //
-            <EventCard
+         {last && last.title && 
+            <EventCard 
               data-testid="last-event-card"
               imageSrc={last?.cover}
               imageAlt={last?.description}
@@ -137,7 +137,7 @@ const Page = () => {
               date={new Date(last?.date)}
               small
               label={last?.type}
-            />}
+            />} 
       
         
       </div>
